@@ -34,10 +34,33 @@ public class Packer {
         for (String line : fileContents) {
             inputObjects.add(util.parseLineToItemObject(line));
         }
+        validateConstraints(inputObjects);
         for (InputObject inputObject : inputObjects) {
             finalResult = finalResult.append(findOptimalItems(inputObject));
         }
         return finalResult.toString();
+    }
+
+    /**
+     * This method validates the additional constraints
+     *
+     * @param inputObjects Input file parsed into Object model
+     * @throws APIException in case of violation of any validation constraints
+     */
+    protected static void validateConstraints(List<InputObject> inputObjects) throws APIException {
+        for (InputObject inputObject : inputObjects) {
+            if (inputObject.getPackageWeightCapacity() > 100) {
+                throw new APIException("Max Package weight constraint violated");
+            }
+            for (Item item : inputObject.getItemChoiceList()) {
+                if (item.getWeight() > 100) {
+                    throw new APIException("Max Item weight constraint violated");
+                }
+                if (item.getPrice() > 100) {
+                    throw new APIException("Max Item price constraint violated");
+                }
+            }
+        }
     }
 
     /**

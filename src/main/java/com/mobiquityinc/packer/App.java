@@ -7,6 +7,7 @@ import com.mobiquityinc.exception.APIException;
  */
 public class App {
     public static void main(String[] args) throws APIException {
+        System.out.println("################## Packer App ##################");
         System.out.println("Please provide absolute path to the test file : ");
         String input = System.console().readLine();
         System.out.println(Packer.pack(input));

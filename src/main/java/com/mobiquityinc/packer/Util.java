@@ -8,11 +8,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -76,7 +74,7 @@ class Util {
         lineContent = lineContent.substring(lineContent.indexOf('('), lineContent.length());
         String[] content = lineContent.split("[)]");
         try {
-            Arrays.asList(content).forEach(val -> {
+            for (String val : content) {
                 val = val.replace("(", "");
                 Item item = new Item();
                 String[] params = val.split(",");
@@ -84,7 +82,7 @@ class Util {
                 item.setWeight(Double.parseDouble(params[1].trim()));
                 item.setPrice(Double.parseDouble(params[2].substring(1, params[2].length()).trim()));
                 itemList.add(item);
-            });
+            }
         } catch (NumberFormatException nfe) {
             logger.error("Error during parsing", nfe);
             throw new APIException("Input values specified have incorrect syntax");
