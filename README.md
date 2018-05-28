@@ -12,13 +12,15 @@ This ensures that the package always consists of highest priced items.
 ## HOW-TO
 > Windows
 ```bash
-git clone 
+git clone https://github.com/arani87/packerapp.git
+cd packerapp
 mvnw.cmd clean install
 java -jar target\optimalpacker-1.0.0-SNAPSHOT-jar-with-dependencies.jar
 ```
 > Linux/Mac/Git Bash
 ```shell
-git clone 
+git clone https://github.com/arani87/packerapp.git
+cd packerapp
 ./mvnw clean install
 java -jar target/optimalpacker-1.0.0-SNAPSHOT-jar-with-dependencies.jar
 ```
