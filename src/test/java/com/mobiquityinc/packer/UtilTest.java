@@ -33,6 +33,30 @@ public class UtilTest {
         Assert.assertEquals(81, obj.getPackageWeightCapacity(), 0.001);
     }
 
+    @Test(expected = APIException.class)
+    public void testparseLineToItemObjectEmptyInputLine() throws APIException {
+        String lineContent = null;
+        InputObject obj = util.parseLineToItemObject(lineContent);
+    }
+
+    @Test(expected = APIException.class)
+    public void testparseLineToItemObjectIncorrectInput() throws APIException {
+        String lineContent = "(1,53.38,€45) (2,88.62,€98) (3,78.48,€3) (4,72.30,€76) (5,30.18,€9) (6,46.34,€48)";
+        InputObject obj = util.parseLineToItemObject(lineContent);
+    }
+
+    @Test(expected = APIException.class)
+    public void testparseLineToItemObjectIncorrectInput2() throws APIException {
+        String lineContent = "8d1: (1d,53.38,€45) (2,88.f62,€98) (3,78.48,€3) (4,72.30,€76) (5#,30.18,€9) (6,46.34,€48)";
+        InputObject obj = util.parseLineToItemObject(lineContent);
+    }
+
+    @Test(expected = APIException.class)
+    public void testparseLineToItemObjectIncorrectInput3() throws APIException {
+        String lineContent = "81: (1d,53.38,€45) (2,88.f62,€98) (3,78.48,€3) (4,72.30,€76) (5#,30.18,€9) (6,46.34,€48)";
+        InputObject obj = util.parseLineToItemObject(lineContent);
+    }
+
     @Test
     public void testRegex() {
         String lineContent = "81 : (1,53.38,€45) (2,88.62,€98) (3,78.48,€3) (4,72.30,€76) (5,30.18,€9) (6,46.34,€48)";
